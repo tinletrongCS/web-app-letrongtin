@@ -1,10 +1,8 @@
 package vn.edu.hcmut.cse.adse.lab.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 import vn.edu.hcmut.cse.adse.lab.entity.Student;
 import vn.edu.hcmut.cse.adse.lab.service.StudentService;
 
@@ -17,9 +15,16 @@ public class StudentController {
     private StudentService studentService;
 
     @GetMapping
-    public List<Student> getAllStudents()
-    {
-        return studentService.getAll();
+    public String getAllStudents(@RequestParam(required = false) String keyword, Model model) {
+        List<Student> students;
+        if (keyword != null && !keyword.isEmpty()) {
+            // Can viet them ham searchByName trong Service/Repository
+            students = studentService.searchByName(keyword);
+        } else {
+            students = studentService.getAll();
+        }
+        model.addAttribute("dsSinhVien", students);
+        return "students";
     }
 
     @GetMapping("/{id}")
