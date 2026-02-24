@@ -1,35 +1,57 @@
-<body>
-<h1>Danh Sach Sinh Vien (SSR)</h1>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Danh Sách Sinh Viên</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+<div class="container mt-5">
+    <h1 class="mb-4 text-primary fw-bold text-center">🎓 Quản Lý Sinh Viên</h1>
 
-<div style="margin-bottom: 15px;">
-    <a href="/students/create" style="padding: 8px 15px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 4px;">+ Thêm Mới</a>
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <a href="/students/create" class="btn btn-success shadow-sm">
+                + Thêm Sinh Viên Mới
+            </a>
+        </div>
+        <div class="col-md-6">
+            <form action="/students" method="GET" class="d-flex">
+                <input type="text" name="keyword" class="form-control me-2 shadow-sm" placeholder="Nhập tên sinh viên cần tìm..." />
+                <button type="submit" class="btn btn-primary shadow-sm">Tìm</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-body p-0">
+            <table class="table table-striped table-hover mb-0">
+                <thead class="table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Họ và Tên</th>
+                    <th>Email</th>
+                    <th>Tuổi</th>
+                    <th class="text-center">Hành Động</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="student : ${dsSinhVien}">
+                    <td class="align-middle fw-bold" th:text="${student.id}"></td>
+                    <td class="align-middle" th:text="${student.name}"></td>
+                    <td class="align-middle" th:text="${student.email}"></td>
+                    <td class="align-middle" th:text="${student.age}"></td>
+                    <td class="align-middle text-center">
+                        <a th:href="@{/students/{id}(id=${student.id})}" class="btn btn-sm btn-info text-white">Xem Chi Tiết</a>
+                    </td>
+                </tr>
+                <tr th:if="${#lists.isEmpty(dsSinhVien)}">
+                    <td colspan="5" class="text-center text-muted py-4">Không tìm thấy sinh viên nào.</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
-
-<form action="/students" method="GET">
-    <input type="text" name="keyword" placeholder="Nhap ten..." />
-    <button type="submit">Tim</button>
-</form>
-
-<table>
-    <thead>
-    <tr>
-        <th>Mã số sinh viên</th>
-        <th>Họ và tên</th>
-        <th>Email</th>
-        <th>Tuổi</th>
-        <th>Hành Động</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="student : ${dsSinhVien}">
-        <td th:text="${student.id}">ID Mau</td>
-        <td th:text="${student.name}">Ten Mau</td>
-        <td th:text="${student.email}">Email Mau</td>
-        <td th:text="${student.age}">0</td>
-        <td>
-            <a th:href="@{/students/{id}(id=${student.id})}">Xem Chi Tiết</a>
-        </td>
-    </tr>
-    </tbody>
-</table>
 </body>
+</html>
