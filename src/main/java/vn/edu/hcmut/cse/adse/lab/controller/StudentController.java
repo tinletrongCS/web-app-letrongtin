@@ -1,6 +1,7 @@
 package vn.edu.hcmut.cse.adse.lab.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import vn.edu.hcmut.cse.adse.lab.entity.Student;
@@ -14,22 +15,17 @@ public class StudentController {
     @Autowired
     private StudentService studentService;
 
+    // TODO: Xem va tim kiem
     @GetMapping
-    public String getAllStudents(@RequestParam(required = false) String keyword, Model model) {
-        List<Student> students;
-        if (keyword != null && !keyword.isEmpty()) {
-            // Can viet them ham searchByName trong Service/Repository
-            students = studentService.searchByName(keyword);
-        } else {
-            students = studentService.getAll();
-        }
-        model.addAttribute("dsSinhVien", students);
-        return "students";
+    public List<Student> getAllStudents(@RequestParam(required = false) String keyword, Model model)
+    {
+        return studentService.getAll();
     }
 
     @GetMapping("/{id}")
-    public Student getStudentById(@PathVariable String id)
+    public Student getStudentById(@PathVariable String id, Model model)
     {
         return studentService.getById(id);
     }
+
 }

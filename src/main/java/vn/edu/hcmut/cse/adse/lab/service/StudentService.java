@@ -23,6 +23,16 @@ public class StudentService {
 
     public List<Student> searchByName(String keyword)
     {
-        return null;
+        return studentRepository.findByNameContainingIgnoreCase(keyword);
+    }
+
+    public Student save(Student student)
+    {
+        return studentRepository.save(student);
+    }
+
+    public void deleteById(String id)
+    {
+        studentRepository.deleteById(id);
     }
 }

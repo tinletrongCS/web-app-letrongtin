@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Chi Tiet Sinh Vien</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; }
+        .info-box { border: 1px solid #ccc; padding: 15px; max-width: 400px; border-radius: 5px; margin-bottom: 20px;}
+        .btn { padding: 8px 15px; text-decoration: none; border-radius: 4px; border: none; cursor: pointer; font-size: 14px;}
+        .btn-edit { background-color: #ffc107; color: black; }
+        .btn-delete { background-color: #f44336; color: white; }
+        .btn-back { background-color: #e7e7e7; color: black; }
+    </style>
+</head>
+<body>
+<h1>Chi Tiết Sinh Viên</h1>
+
+<div class="info-box" th:if="${sinhVien != null}">
+    <p><strong>ID:</strong> <span th:text="${sinhVien.id}"></span></p>
+    <p><strong>Họ và Tên:</strong> <span th:text="${sinhVien.name}"></span></p>
+    <p><strong>Email:</strong> <span th:text="${sinhVien.email}"></span></p>
+    <p><strong>Tuổi:</strong> <span th:text="${sinhVien.age}"></span></p>
+</div>
+
+<div th:if="${sinhVien == null}">
+    <p style="color: red;">Không tìm thấy sinh viên!</p>
+</div>
+
+<div th:if="${sinhVien != null}">
+    <a class="btn btn-edit" th:href="@{/students/edit/{id}(id=${sinhVien.id})}">Chỉnh Sửa</a>
+
+    <form th:action="@{/students/delete/{id}(id=${sinhVien.id})}" method="POST" style="display:inline;" onsubmit="return confirm('Bạn có chắc chắn muốn xóa sinh viên này không?');">
+        <button type="submit" class="btn btn-delete">Xóa</button>
+    </form>
+</div>
+
+<br><br>
+<a class="btn btn-back" href="/students">Quay Lại Danh Sách</a>
+
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html>
