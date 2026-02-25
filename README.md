@@ -89,6 +89,4 @@ Form nhập liệu tái sử dụng cho cả hai chức năng Create và Update.
 4. Xác Nhận Xóa (Delete Confirmation)
 <img width="1057" height="580" alt="image" src="https://github.com/user-attachments/assets/2dfbb020-bd95-45fe-8746-9ea8ef596eec" />
 
-Hộp thoại cảnh báo hiển thị trước khi thực hiện thao tác xóa dữ liệu vĩnh viễn khỏi Database.
 
-Chèn ảnh chụp màn hình lúc bấm nút Xóa có hiện bảng Confirm vào đây.
